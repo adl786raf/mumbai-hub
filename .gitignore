@@ -3,6 +3,7 @@ music/
 videos/
 backups/
 *.mp4
+*.mkv
 *.mp3
 *.jpg
 *.png
