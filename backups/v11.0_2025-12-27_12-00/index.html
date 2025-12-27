@@ -1,0 +1,71 @@
+<html><head><title>Mumbai+ Elite Hub</title><style>
+    :root { --cyan: #00adb5; --bg: #0a0a0a; --card: #141414; --text: white; --header: rgba(10, 10, 10, 0.95); --border: #333; }
+    body.light-mode { --bg: #f5f5f5; --card: #ffffff; --text: #1a1a1a; --header: rgba(245, 245, 245, 0.95); --border: #ddd; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; padding: 0 20px 20px 20px; scroll-behavior: smooth; margin: 0; transition: background 0.3s; }
+    
+    .header-pnl { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding: 15px 20px; position: sticky; top: 0; background: var(--header); backdrop-filter: blur(10px); z-index: 1000; }
+    .nav-right { display: flex; align-items: center; gap: 15px; }
+    
+    /* CATEGORY TABS */
+    .category-nav { display: flex; gap: 10px; padding: 15px 0; position: sticky; top: 80px; background: var(--bg); z-index: 999; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+    .cat-btn { background: #222; color: white; border: 1px solid #444; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .cat-btn:hover, .cat-btn.active { background: var(--cyan); color: black; border-color: var(--cyan); }
+
+    .view-section { display: none; }
+    .view-section.active { display: block; }
+
+    #searchBar { background: #222; border: 1px solid var(--cyan); color: white; padding: 10px 20px; border-radius: 25px; width: 200px; outline: none; transition: 0.3s; }
+    body.light-mode #searchBar { background: white; color: black; border: 1px solid #ccc; }
+    #themeToggle { background: var(--cyan); border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: 800; color: #000 !important; font-size: 0.7em; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .card { background: var(--card); padding: 8px; border: 1px solid var(--border); border-radius: 10px; transition: 0.3s; height: 180px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; position: relative; }
+    .card:hover { border-color: var(--cyan); transform: scale(1.02); }
+    
+    video, img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; position: absolute; top: 0; left: 0; }
+    .music-bg-icon { position: absolute; top: 20%; font-size: 60px; color: var(--text); opacity: 0.1; transition: 0.5s; }
+    .card:hover .music-bg-icon { transform: rotate(360deg); opacity: 0.3; }
+    
+    h2 { color: var(--text); border-left: 5px solid var(--cyan); padding-left: 15px; margin-top: 30px; text-transform: uppercase; font-size: 1.2em; letter-spacing: 2px; }
+    .audio-wrapper { width: 100%; z-index: 2; padding-bottom: 5px; display: flex; justify-content: center; }
+    audio { width: 95%; height: 35px; }
+
+    #scrollTopBtn { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1001; background: var(--cyan); color: #000; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-weight: bold; }
+</style></head><body>
+<div class='header-pnl'><h1>MUMBAI+ HUB</h1>
+<div class='nav-right'><input type='text' id='searchBar' onkeyup='doSearch()' placeholder='Search...'>
+<button id='themeToggle' onclick='toggleTheme()'>MODE: LIGHT</button></div></div>
+<div class='category-nav'>
+    <button class='cat-btn active' onclick='showCategory(home)'>🏠 HOME</button>
+    <button class='cat-btn' onclick='showCategory(images)'>🖼️ IMAGES</button>
+    <button class='cat-btn' onclick='showCategory(music)'>🎵 MUSIC</button>
+    <button class='cat-btn' onclick='showCategory(ideos)'>🎬 VIDEOS</button>
+</div><div id='view-home' class='view-section active'><h2>Recently Added / Spotlight</h2><div class='grid'><div class='card' data-name='pexels-jean-daniel-25244465'><img src='./images/2025/pexels-jean-daniel-25244465.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-ioanamtc-19149200'><img src='./images/Screenshots/pexels-ioanamtc-19149200.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-jean-daniel-31737045'><img src='./images/Screenshots/pexels-jean-daniel-31737045.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-2156836211-35098524'><img src='./images/Wallpapers/pexels-2156836211-35098524.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-majesticaljasmin-6598961'><img src='./images/Wallpapers/pexels-majesticaljasmin-6598961.jpg' onclick='window.open($path)'></div><div class='card' data-name='future-design-344320'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/future-design-344320.mp3'></audio></div></div><div class='card' data-name='running-night-393139'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/running-night-393139.mp3'></audio></div></div><div class='card' data-name='for-p-453681'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Favorites/for-p-453681.mp3'></audio></div></div><div class='card' data-name='14937568_2160_3840_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Archive/14937568_2160_3840_30fps.mp4'></video></div><div class='card' data-name='8243988-uhd_2160_4096_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Archive/8243988-uhd_2160_4096_25fps.mp4'></video></div><div class='card' data-name='14900478_1080_1920_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Family/14900478_1080_1920_30fps.mp4'></video></div><div class='card' data-name='14946547_3840_2160_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Family/14946547_3840_2160_25fps.mp4'></video></div><div class='card' data-name='14857189_1080_1920_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/TV Shows/14857189_1080_1920_30fps.mp4'></video></div><div class='card' data-name='14946453_3840_2160_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/TV Shows/14946453_3840_2160_25fps.mp4'></video></div><div class='card' data-name='10065395-hd_1080_1920_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Work/10065395-hd_1080_1920_30fps.mp4'></video></div><div class='card' data-name='14923235_1920_1080_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Work/14923235_1920_1080_30fps.mp4'></video></div></div></div><div id='view-images' class='view-section'><h2>images\2025</h2><div class='grid'><div class='card' data-name='pexels-jean-daniel-25244465'><img src='./images/2025/pexels-jean-daniel-25244465.jpg' onclick='window.open($path)'></div></div><h2>images\Screenshots</h2><div class='grid'><div class='card' data-name='pexels-ioanamtc-19149200'><img src='./images/Screenshots/pexels-ioanamtc-19149200.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-jean-daniel-31737045'><img src='./images/Screenshots/pexels-jean-daniel-31737045.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-karinarymarchuk-30233541'><img src='./images/Screenshots/pexels-karinarymarchuk-30233541.jpg' onclick='window.open($path)'></div></div><h2>images\Wallpapers</h2><div class='grid'><div class='card' data-name='pexels-2156836211-35098524'><img src='./images/Wallpapers/pexels-2156836211-35098524.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-majesticaljasmin-6598961'><img src='./images/Wallpapers/pexels-majesticaljasmin-6598961.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-muhamad-arif-ikhwani-2157570219-34917999'><img src='./images/Wallpapers/pexels-muhamad-arif-ikhwani-2157570219-34917999.jpg' onclick='window.open($path)'></div><div class='card' data-name='pexels-novirina-ru-19743430'><img src='./images/Wallpapers/pexels-novirina-ru-19743430.jpg' onclick='window.open($path)'></div></div></div><div id='view-music' class='view-section'><h2>music\Artists</h2><div class='grid'><div class='card' data-name='future-design-344320'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/future-design-344320.mp3'></audio></div></div><div class='card' data-name='running-night-393139'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/running-night-393139.mp3'></audio></div></div><div class='card' data-name='vlog-beat-background-349853'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/vlog-beat-background-349853.mp3'></audio></div></div></div><h2>music\Favorites</h2><div class='grid'><div class='card' data-name='for-p-453681'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Favorites/for-p-453681.mp3'></audio></div></div></div></div><div id='view-videos' class='view-section'><h2>videos\Archive</h2><div class='grid'><div class='card' data-name='14937568_2160_3840_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Archive/14937568_2160_3840_30fps.mp4'></video></div><div class='card' data-name='8243988-uhd_2160_4096_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Archive/8243988-uhd_2160_4096_25fps.mp4'></video></div><div class='card' data-name='9909326-uhd_2160_4096_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Archive/9909326-uhd_2160_4096_25fps.mp4'></video></div></div><h2>videos\Family</h2><div class='grid'><div class='card' data-name='14900478_1080_1920_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Family/14900478_1080_1920_30fps.mp4'></video></div><div class='card' data-name='14946547_3840_2160_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Family/14946547_3840_2160_25fps.mp4'></video></div><div class='card' data-name='8051999-uhd_2160_3840_24fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Family/8051999-uhd_2160_3840_24fps.mp4'></video></div></div><h2>videos\TV Shows</h2><div class='grid'><div class='card' data-name='14857189_1080_1920_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/TV Shows/14857189_1080_1920_30fps.mp4'></video></div><div class='card' data-name='14946453_3840_2160_25fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/TV Shows/14946453_3840_2160_25fps.mp4'></video></div><div class='card' data-name='14962201_2160_3840_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/TV Shows/14962201_2160_3840_30fps.mp4'></video></div></div><h2>videos\Work</h2><div class='grid'><div class='card' data-name='10065395-hd_1080_1920_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Work/10065395-hd_1080_1920_30fps.mp4'></video></div><div class='card' data-name='14923235_1920_1080_30fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Work/14923235_1920_1080_30fps.mp4'></video></div><div class='card' data-name='17924481-uhd_2160_3840_60fps'><video muted onmouseover='this.play()' onmouseout='this.pause()' src='./videos/Work/17924481-uhd_2160_3840_60fps.mp4'></video></div></div></div><script>
+    function showCategory(cat) {
+        document.querySelectorAll(".view-section").forEach(s => s.classList.remove("active"));
+        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+        document.getElementById("view-" + cat).classList.add("active");
+        event.currentTarget.classList.add("active");
+        window.scrollTo(0,0);
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        document.getElementById('themeToggle').innerHTML = isLight ? 'MODE: DARK' : 'MODE: LIGHT';
+        localStorage.setItem('mumbaiTheme', isLight ? 'light' : 'dark');
+    }
+
+    function doSearch() {
+        let q = document.getElementById("searchBar").value.toLowerCase();
+        document.querySelectorAll(".card").forEach(card => {
+            let txt = card.getAttribute("data-name").toLowerCase();
+            card.style.display = txt.includes(q) ? "block" : "none";
+        });
+    }
+
+    window.onload = function() {
+        if (localStorage.getItem('mumbaiTheme') === 'light') document.body.classList.add('light-mode');
+        document.getElementById("searchBar").focus();
+    };
+</script></body></html>

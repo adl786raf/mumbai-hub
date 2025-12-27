@@ -1,0 +1,90 @@
+<html><head><title>Mumbai+ Elite Hub</title><style>
+    :root { --cyan: #00adb5; --bg: #0a0a0a; --card: #141414; --text: white; --header: rgba(10, 10, 10, 0.95); --border: #333; --icon-op: 0.1; }
+    body.light-mode { --bg: #f5f5f5; --card: #ffffff; --text: #1a1a1a; --header: rgba(245, 245, 245, 0.95); --border: #ddd; --icon-op: 0.05; }
+
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; padding: 0 20px 20px 20px; scroll-behavior: smooth; margin: 0; transition: background 0.3s; }
+    .header-pnl { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding: 20px; position: sticky; top: 0; background: var(--header); backdrop-filter: blur(10px); z-index: 1000; }
+    .nav-right { display: flex; align-items: center; gap: 15px; }
+    h1 { font-size: 2.2em; letter-spacing: 2px; margin: 0; }
+    
+    #searchBar { background: #222; border: 1px solid var(--cyan); color: white; padding: 10px 20px; border-radius: 25px; width: 250px; outline: none; transition: 0.3s; }
+    body.light-mode #searchBar { background: white; color: black; border: 1px solid #ccc; }
+    
+    #themeToggle { background: var(--cyan); border: none; padding: 10px 18px; border-radius: 25px; cursor: pointer; font-weight: 800; color: #000 !important; transition: 0.3s; font-size: 0.8em; letter-spacing: 1px; min-width: 110px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
+    
+    .card { 
+        background: var(--card); padding: 10px; border: 1px solid var(--border); border-radius: 12px; 
+        transition: 0.3s; height: 200px; display: flex; flex-direction: column; 
+        justify-content: flex-end; align-items: center; overflow: hidden; position: relative;
+    }
+    .card:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,173,181,0.2); }
+    
+    video, img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; background: #000; cursor: pointer; position: absolute; top: 0; left: 0; }
+    
+    .music-bg-icon {
+        position: absolute; top: 25%; font-size: 80px; color: var(--text); opacity: var(--icon-op); 
+        pointer-events: none; z-index: 1; transition: 0.8s ease-in-out;
+    }
+    .card:hover .music-bg-icon {
+        transform: rotate(360deg) scale(1.2);
+        opacity: calc(var(--icon-op) * 2);
+    }
+
+    .audio-wrapper { width: 100%; display: flex; justify-content: center; padding-bottom: 10px; z-index: 2; }
+    audio { width: 95%; height: 40px; }
+
+    h2 { color: var(--text); border-left: 6px solid var(--cyan); padding-left: 20px; margin-top: 40px; margin-bottom: 20px; text-transform: uppercase; font-size: 1.5em; letter-spacing: 3px; font-weight: 800; }
+    .filename { display: none; }
+    
+    #scrollTopBtn { 
+        display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1001; 
+        background: var(--cyan); color: #000; border: none; width: 55px; height: 55px; 
+        border-radius: 50%; cursor: pointer; font-weight: bold; transition: 0.3s; 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3); align-items: center; justify-content: center;
+    }
+
+    #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+    #lightbox img { max-width: 90%; max-height: 90%; border: 2px solid var(--cyan); }
+</style></head><body><div class='header-pnl'><h1>MUMBAI+ HUB</h1><div class='nav-right'><input type='text' id='searchBar' onkeyup='doSearch()' placeholder='Instant Search...'><button id='themeToggle' onclick='toggleTheme()'></button></div></div><button id='scrollTopBtn' onclick='scrollToTop()'>TOP</button><div id='lightbox' onclick='closeLightbox()'><img id='lbImg'></div><h2>images / 2025</h2><div class='grid'><div class='card'><img src='./images/2025/pexels-jean-daniel-25244465.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-jean-daniel-25244465</div></div></div><h2>images / Screenshots</h2><div class='grid'><div class='card'><img src='./images/Screenshots/pexels-ioanamtc-19149200.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-ioanamtc-19149200</div></div><div class='card'><img src='./images/Screenshots/pexels-jean-daniel-31737045.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-jean-daniel-31737045</div></div><div class='card'><img src='./images/Screenshots/pexels-karinarymarchuk-30233541.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-karinarymarchuk-30233541</div></div></div><h2>images / Wallpapers</h2><div class='grid'><div class='card'><img src='./images/Wallpapers/pexels-2156836211-35098524.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-2156836211-35098524</div></div><div class='card'><img src='./images/Wallpapers/pexels-majesticaljasmin-6598961.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-majesticaljasmin-6598961</div></div><div class='card'><img src='./images/Wallpapers/pexels-muhamad-arif-ikhwani-2157570219-34917999.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-muhamad-arif-ikhwani-2157570219-34917999</div></div><div class='card'><img src='./images/Wallpapers/pexels-novirina-ru-19743430.jpg' onclick='openLightbox($filePath)'><div class='filename'>pexels-novirina-ru-19743430</div></div></div><h2>music / Artists</h2><div class='grid'><div class='card'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/future-design-344320.mp3'></audio></div><div class='filename'>future-design-344320</div></div><div class='card'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/running-night-393139.mp3'></audio></div><div class='filename'>running-night-393139</div></div><div class='card'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Artists/vlog-beat-background-349853.mp3'></audio></div><div class='filename'>vlog-beat-background-349853</div></div></div><h2>music / Favorites</h2><div class='grid'><div class='card'><div class='music-bg-icon'>&#9835;</div><div class='audio-wrapper'><audio controls src='./music/Favorites/for-p-453681.mp3'></audio></div><div class='filename'>for-p-453681</div></div></div><h2>videos / Archive</h2><div class='grid'><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Archive/14937568_2160_3840_30fps.mp4'></video><div class='filename'>14937568_2160_3840_30fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Archive/8243988-uhd_2160_4096_25fps.mp4'></video><div class='filename'>8243988-uhd_2160_4096_25fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Archive/9909326-uhd_2160_4096_25fps.mp4'></video><div class='filename'>9909326-uhd_2160_4096_25fps</div></div></div><h2>videos / Family</h2><div class='grid'><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Family/14900478_1080_1920_30fps.mp4'></video><div class='filename'>14900478_1080_1920_30fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Family/14946547_3840_2160_25fps.mp4'></video><div class='filename'>14946547_3840_2160_25fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Family/8051999-uhd_2160_3840_24fps.mp4'></video><div class='filename'>8051999-uhd_2160_3840_24fps</div></div></div><h2>videos / TV Shows</h2><div class='grid'><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/TV Shows/14857189_1080_1920_30fps.mp4'></video><div class='filename'>14857189_1080_1920_30fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/TV Shows/14946453_3840_2160_25fps.mp4'></video><div class='filename'>14946453_3840_2160_25fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/TV Shows/14962201_2160_3840_30fps.mp4'></video><div class='filename'>14962201_2160_3840_30fps</div></div></div><h2>videos / Work</h2><div class='grid'><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Work/10065395-hd_1080_1920_30fps.mp4'></video><div class='filename'>10065395-hd_1080_1920_30fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Work/14923235_1920_1080_30fps.mp4'></video><div class='filename'>14923235_1920_1080_30fps</div></div><div class='card'><video onmouseover='this.play()' onmouseout='this.pause();this.currentTime=0' muted controls src='./videos/Work/17924481-uhd_2160_3840_60fps.mp4'></video><div class='filename'>17924481-uhd_2160_3840_60fps</div></div></div><script>
+    window.onload = function() {
+        const savedTheme = localStorage.getItem('mumbaiTheme');
+        const btn = document.getElementById('themeToggle');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            btn.innerHTML = 'MODE: DARK';
+        } else {
+            btn.innerHTML = 'MODE: LIGHT';
+        }
+        document.getElementById("searchBar").focus();
+    };
+
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        document.getElementById('themeToggle').innerHTML = isLight ? 'MODE: DARK' : 'MODE: LIGHT';
+        localStorage.setItem('mumbaiTheme', isLight ? 'light' : 'dark');
+    }
+
+    window.onscroll = function() {
+        let btn = document.getElementById("scrollTopBtn");
+        if (window.pageYOffset > 400) { btn.style.display = "flex"; } else { btn.style.display = "none"; }
+    };
+
+    function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+    function doSearch() {
+        let q = document.getElementById("searchBar").value.toLowerCase();
+        document.querySelectorAll(".card").forEach(card => {
+            let txt = card.innerText.toLowerCase();
+            card.style.display = txt.includes(q) ? "block" : "none";
+        });
+    }
+    function openLightbox(src) {
+        const lb = document.getElementById("lightbox");
+        document.getElementById("lbImg").src = src;
+        lb.style.display = "flex";
+    }
+    function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
+</script></body></html>
