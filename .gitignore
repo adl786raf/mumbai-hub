@@ -1,4 +1,4 @@
-images/
+﻿images/
 music/
 videos/
 backups/
@@ -6,4 +6,4 @@ backups/
 *.mkv
 *.mp3
 *.jpg
-*.png
+*.pn
